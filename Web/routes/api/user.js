@@ -3,24 +3,28 @@ const router = express.Router();
 
 const User = require ('../../models/User');
 
-//@route GET api/user
-//@desc Get All Users
-//@access Public
-router.get('/', (req, res)=>{
-    User.find()
-        .then(users => res.json(users))
-});
-
-//@route POST api/user
-//@desc add new user
-//@access Public
+// @route POST api/user
+// @desc add new user
+// @access Public
 router.post('/', (req, res)=>{
-    /* insert in db
-    const newUserReport = new UserReport({
-        username: req.body.name
+    const { firstname, lastname, username, email, password} = req.body;
+    if (!firstname || !lastname || !username || !password) {
+        return res.status(400).json({msg: 'Please enter all the fields'})
+    }
+
+    User.findOne({username})
+        .then(user => {
+            if (user) return res.status(400).json({msg: 'Username already exists'})
+        });
+        
+    const newUser = new User ({
+        username, 
+        password,
+        firstname,
+        lastname,
+        email
     });
-    newUserReport.save().then(userReport => res.json(item));
-    */
+    newUser.save().then(userReport => res.json(userReport));
 });
 
 module.exports = router;

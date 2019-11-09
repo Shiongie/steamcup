@@ -14,6 +14,6 @@ const LTOInfoSchema = new Schema({
         type: String,
         required: true
     }
-});
+}, { collection: 'LTOInfo' });
 
 module.exports = LTOInfo = mongoose.model('LTOInfo', LTOInfoSchema);

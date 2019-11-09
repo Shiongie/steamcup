@@ -6,7 +6,7 @@ const UserReport = require ('../../models/UserReport');
 //@route GET api/userReport
 //@desc Get All UserReports
 //@access Public
-router.get('/', (req, res)=>{
+router.get('/', (req, res) => {
     UserReport.find()
         .then(userReports => res.json(userReports))
 });
@@ -17,6 +17,7 @@ router.get('/', (req, res)=>{
 router.post('/', (req, res)=>{
     const newUserReport = new UserReport({
         username: req.body.username,
+        image: req.body.username,
         location: req.body.location,
         plateno: req.body.plateno
     });
@@ -31,6 +32,5 @@ router.delete('/:id', (req, res)=>{
     .then(userReport => userReport.remove().then(()=> res.json({success: true})))
     .catch(err => res.status(404).json({success:false}));
 });
-
 
 module.exports = router;

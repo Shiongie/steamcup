@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const UserReportSchema = new Schema({
+const UserReportSchema = mongoose.Schema({
     username: {
         type: String,
-        required: true
     },
     image: {
         type: String,
-        default: "./images/"
+        default: "../images/"
     },
     date: {
         type: Date,
@@ -26,6 +24,6 @@ const UserReportSchema = new Schema({
         default: "received"
     }
 
-});
+}, { collection: 'UserReport' });
 
 module.exports = UserReport = mongoose.model('UserReport', UserReportSchema);

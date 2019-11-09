@@ -15,8 +15,8 @@ const LTOReportSchema = new Schema({
     },
     status: {
         type: String,
-        default: pending
+        default: "pending"
     }
-});
+}, { collection: 'LTOReport' });
 
 module.exports = LTOReport = mongoose.model('LTOReport', LTOReportSchema);
